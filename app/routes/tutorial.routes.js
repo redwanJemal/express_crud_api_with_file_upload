@@ -1,10 +1,14 @@
 module.exports = app => {
   const tutorials = require("../controllers/tutorial.controller.js");
+  const photos = require("../controllers/photo.controller.js");
 
   var router = require("express").Router();
 
   // Create a new Tutorial
   router.post("/", tutorials.create);
+
+  // Create a new Photo
+  router.post("/photo", photos.uploadPhoto);
 
   // Uploading Files
   router.post("/uploadFile", tutorials.uploadFile);

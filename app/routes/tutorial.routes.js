@@ -6,6 +6,9 @@ module.exports = app => {
   // Create a new Tutorial
   router.post("/", tutorials.create);
 
+  // Uploading Files
+  router.post("/uploadFile", tutorials.uploadFile);
+
   // Retrieve all Tutorials
   router.get("/", tutorials.findAll);
 

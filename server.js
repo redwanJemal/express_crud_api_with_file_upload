@@ -1,4 +1,5 @@
 const express = require("express");
+const fileUpload = require('express-fileupload');
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
@@ -7,6 +8,11 @@ const app = express();
 var corsOptions = {
   origin: "http://localhost:8081"
 };
+
+// enable files upload
+app.use(fileUpload({
+  createParentPath: true
+}));
 
 app.use(cors(corsOptions));
 
@@ -26,7 +32,7 @@ db.sequelize.sync();
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Express Tutorial application." });
+  res.json({ message: "Welcome to Express Tutorial application Example." });
 });
 
 require("./app/routes/tutorial.routes")(app);

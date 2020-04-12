@@ -1,5 +1,5 @@
 {
-  "name": "mysqlintegration",
+  "name": "express_crud_api_with_mysql",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",

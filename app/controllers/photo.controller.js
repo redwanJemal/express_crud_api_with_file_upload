@@ -67,9 +67,12 @@ exports.getById = async (req, res) => {
     
     try {
         const photo = await Photo.findByPk(id);
+        if(!photo){
+            res.json({'message':'Not Found'},404);
+        }
         res.json(photo);
 
-    } catch (error) {
+    } catch (err) {
         res.status(500).send({
         message:
             err.message || "Error retrieving Tutorial with id=" + id
@@ -105,4 +108,35 @@ exports.LikePhoto = async (req, res) => {
         });
     }
 }
+
+// Delete Photo
+exports.delete = async (req, res) => {
+    const id = req.params.id;
+    const notDeleted = `Cannot delete Photo with id=${id}. Maybe Photo was not found!`;
+    const deleted = "Photo was deleted successfully!";
+    
+    try {
+        const photo = await Photo.findByPk(id);
+        if(!photo){
+            res.send('Not Found',404)
+        }
+
+        const result = await Photo.destroy({
+            where: { id: id }
+        });
+        // if photo is deleted remove from storage
+        if(result == 1){
+            // remove the path
+        }
+        res.json(result == 1?deleted:notDeleted);
+
+    } catch (error) {
+        res.status(500).send({
+        message:
+            err.message || `Could not delete Photo with id=${id}`
+        });
+    }
+};
+
+
   
